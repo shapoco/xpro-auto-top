@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        XPro Auto Top
 // @namespace   https://github.com/shapoco/xpro-auto-top/
-// @updateURL   http://localhost:9876/xpro-auto-top.user.js
-// @downloadURL http://localhost:9876/xpro-auto-top.user.js
+// @updateURL   https://github.com/shapoco/xpro-auto-top/raw/refs/heads/main/dist/xpro-auto-top.user.js
+// @downloadURL https://github.com/shapoco/xpro-auto-top/raw/refs/heads/main/dist/xpro-auto-top.user.js
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*

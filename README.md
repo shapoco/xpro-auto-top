@@ -7,6 +7,6 @@ XPro (旧TweetDeck) で「新しいポストを表示」を自動的にクリッ
 ## インストール方法
 
 1. Chrome または Firefox に [Violentmonkey](https://violentmonkey.github.io/) または [Tampermonkey](https://www.tampermonkey.net/) をインストールします。
-2. [こちらのリンク](https://shapoco.github.io/xpro-auto-top/xpro-auto-top.user.js) を開き、ユーザースクリプトをインストールします。
+2. [こちらのリンク](https://github.com/shapoco/xpro-auto-top/raw/refs/heads/main/dist/xpro-auto-top.user.js) を開き、ユーザースクリプトをインストールします。
 
 ----
