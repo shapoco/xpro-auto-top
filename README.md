@@ -2,6 +2,8 @@
 
 XPro (旧TweetDeck) で「新しいポストを表示」を自動的にクリックする Greasemonkey UserScript です。
 
+※ カラム上にマウスカーソルがあるときはクリックしません。
+
 ## インストール方法
 
 1. Chrome または Firefox に [Violentmonkey](https://violentmonkey.github.io/) または [Tampermonkey](https://www.tampermonkey.net/) をインストールします。
