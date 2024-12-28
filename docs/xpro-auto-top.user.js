@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name        XPro Auto Top
+// @name        XProAutoTop
 // @namespace   https://github.com/shapoco/xpro-auto-top/
 // @updateURL   https://github.com/shapoco/xpro-auto-top/raw/refs/heads/main/dist/xpro-auto-top.user.js
 // @downloadURL https://github.com/shapoco/xpro-auto-top/raw/refs/heads/main/dist/xpro-auto-top.user.js
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*
-// @version     1.0.31
+// @version     1.0.32
 // @author      Shapoco
 // @description 「新しいポストを表示」を自動的にクリックする
 // @run-at      document-start
