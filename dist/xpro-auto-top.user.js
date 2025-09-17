@@ -6,14 +6,16 @@
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*
-// @version     1.0.32
+// @version     1.0.39
 // @author      Shapoco
 // @description 「新しいポストを表示」を自動的にクリックする
 // @run-at      document-start
 // ==/UserScript==
 
-(function() {
+(function () {
   'use strict';
+
+  const DEBUG_MODE = false;
 
   class XProAutoTop {
     constructor() {
@@ -45,7 +47,7 @@
     processSection(section) {
       // 最もrootに近いsectionのみを抽出
       var p = section.parentNode;
-      while(p && p.tagName) {
+      while (p && p.tagName) {
         if (p.tagName.toUpperCase() === 'SECTION') {
           return false;
         }
@@ -59,11 +61,17 @@
       section.addEventListener('mouseover', () => {
         if (!this.hoveredSections.includes(section)) {
           this.hoveredSections.push(section);
+          if (DEBUG_MODE) {
+            console.log(`mouseover ${this.hoveredSections.length}`);
+          }
         }
       });
       section.addEventListener('mouseout', () => {
         if (this.hoveredSections.includes(section)) {
           this.hoveredSections.pop(section);
+          if (DEBUG_MODE) {
+            console.log(`mouseout  ${this.hoveredSections.length}`);
+          }
         }
       });
       return true;
@@ -78,11 +86,14 @@
       });
     }
 
-    // ボタン毎の処理
+    /** ボタン毎の処理
+     * @param {HTMLElement} span
+     */
     processSpan(span) {
       // span要素を含むbuttonを探す
+      /** @type {HTMLElement} */
       var button = span.parentNode;
-      while(button.tagName.toUpperCase() !== 'BUTTON') {
+      while (button.tagName.toUpperCase() !== 'BUTTON') {
         button = button.parentNode;
         if (!button) return;
       }
@@ -93,9 +104,18 @@
       }
 
       // ボタンが所属するカラムがカーソルを含む場合は延期
-      for(var section of this.hoveredSections) {
+      for (var section of this.hoveredSections) {
         const childButtons = Array.from(section.querySelectorAll('button'));
         if (childButtons.filter(b => b == button).length > 0) {
+          button.dataset.xpatLastHovered = (new Date()).getTime();
+          return;
+        }
+      }
+
+      // 最後にホバーされてから 5 秒以内なら延期
+      if (button.dataset.xpatLastHovered) {
+        const lastHovered = parseInt(button.dataset.xpatLastHovered);
+        if ((new Date()).getTime() - lastHovered <= 5000) {
           return;
         }
       }
