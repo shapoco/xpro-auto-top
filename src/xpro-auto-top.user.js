@@ -6,7 +6,7 @@
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*
-// @version     1.0.43
+// @version     1.0.44
 // @author      Shapoco
 // @description 「新しいポストを表示」を自動的にクリックする
 // @run-at      document-start

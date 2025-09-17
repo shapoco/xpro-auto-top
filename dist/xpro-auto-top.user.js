@@ -6,7 +6,7 @@
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*
-// @version     1.0.39
+// @version     1.0.44
 // @author      Shapoco
 // @description 「新しいポストを表示」を自動的にクリックする
 // @run-at      document-start
@@ -86,12 +86,9 @@
       });
     }
 
-    /** ボタン毎の処理
-     * @param {HTMLElement} span
-     */
+    // ボタン毎の処理
     processSpan(span) {
       // span要素を含むbuttonを探す
-      /** @type {HTMLElement} */
       var button = span.parentNode;
       while (button.tagName.toUpperCase() !== 'BUTTON') {
         button = button.parentNode;
@@ -108,19 +105,26 @@
         const childButtons = Array.from(section.querySelectorAll('button'));
         if (childButtons.filter(b => b == button).length > 0) {
           button.dataset.xpatLastHovered = (new Date()).getTime();
+          button.style.backgroundColor = '#c80';
           return;
         }
       }
 
-      // 最後にホバーされてから 5 秒以内なら延期
+      // 最後にホバーされてから n 秒以内なら延期
       if (button.dataset.xpatLastHovered) {
         const lastHovered = parseInt(button.dataset.xpatLastHovered);
-        if ((new Date()).getTime() - lastHovered <= 5000) {
+        const elapsed = (new Date()).getTime() - lastHovered;
+        const limit = 5000;
+        if (elapsed <= limit) {
+          const G_MAX = 8;
+          const g = Math.max(0, Math.min(G_MAX, Math.round(G_MAX * (limit - elapsed) / limit)));
+          button.style.backgroundColor = `#c${g}0`;
           return;
         }
       }
 
       // クリック
+      button.style.backgroundColor = null;
       button.click();
     }
   }
