@@ -6,7 +6,7 @@
 // @match       https://tweetdeck.twitter.com/*
 // @match       https://pro.twitter.com/*
 // @match       https://pro.x.com/*
-// @version     1.0.44
+// @version     1.0.49
 // @author      Shapoco
 // @description 「新しいポストを表示」を自動的にクリックする
 // @run-at      document-start
@@ -105,7 +105,7 @@
         const childButtons = Array.from(section.querySelectorAll('button'));
         if (childButtons.filter(b => b == button).length > 0) {
           button.dataset.xpatLastHovered = (new Date()).getTime();
-          button.style.backgroundColor = '#c80';
+          button.style.background = '#c80';
           return;
         }
       }
@@ -116,15 +116,14 @@
         const elapsed = (new Date()).getTime() - lastHovered;
         const limit = 5000;
         if (elapsed <= limit) {
-          const G_MAX = 8;
-          const g = Math.max(0, Math.min(G_MAX, Math.round(G_MAX * (limit - elapsed) / limit)));
-          button.style.backgroundColor = `#c${g}0`;
+          const p = Math.max(0, Math.min(100, Math.round(elapsed * 100 / limit)));
+          button.style.background = `linear-gradient(to right, #08f ${p}%, #c80 ${p}%)`;
           return;
         }
       }
 
       // クリック
-      button.style.backgroundColor = null;
+      button.style.background = null;
       button.click();
     }
   }
